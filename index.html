@@ -1,0 +1,62 @@
+
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Speech Synthesis Demo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+</head>
+<body>
+
+<div id="error" style="display: none; border: 1px solid red; color: red; font-weight: bold"></div>
+
+<header>
+    <h1 id="header">Speech synthesis demo</h1>
+</header>
+
+<p>This demo shows a mock login page.  The aim is to provide enough information to be able to login without requiring
+    a screen-reader such as JAWS, NVDA, or Voiceover</p>
+
+<p id="instructions">Please sign-in using your username and password</p>
+
+<section>
+    <div>
+        <form action="">
+            <div>
+                <label for="username">Some username</label>
+                <input type="text" id="username" name="username">
+            </div>
+            <div>
+                <label for="password">Some password</label>
+                <input type="password" id="password" name="password">
+            </div>
+            <div>
+                <input type="submit" value="Sign-in" disabled>
+            </div>
+        </form>
+    </div>
+</section>
+
+<script>
+  (function() {
+    var errorEl = document.getElementById('error')
+    var synth = window.speechSynthesis
+    if (!synth) {
+      errorEl.innerText = 'Speech synthesis is NOT supported on this browser'
+      errorEl.style.display = ''
+      return
+    }
+
+    // Run this on page load
+    var title = document.getElementById('header').innerText
+    var sayTitle = new SpeechSynthesisUtterance(title)
+    var instructions = document.getElementById('instructions').innerText
+    var sayInstructions = new SpeechSynthesisUtterance(instructions)
+    synth.speak(sayTitle)
+    synth.speak(sayInstructions)
+  })()
+</script>
+
+</body>
+</html>
